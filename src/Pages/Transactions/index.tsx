@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Header } from "../../Components/Header/index";
 import { Summary } from "../../Components/Summary";
+import { TransactionsContext } from "../../contexts/TransactionsContext";
 import { SerachForm } from "./Components/SearchForm";
 import {
   PriceHighlight,
@@ -8,28 +9,8 @@ import {
   TransactionsTable,
 } from "./styles";
 
-interface Transactions {
-  id: number;
-  description: string;
-  type: "income" | "outocome";
-  price: number;
-  category: string;
-  createdAt: string;
-}
-
 export function Transactions() {
-  const [transactions, setTransactions] = useState<Transactions[]>([]);
-
-  async function loadTransactions() {
-    const response = await fetch("http://localhost:333/transactions");
-    const data = await response.json();
-
-    setTransactions(data);
-  }
-
-  useEffect(() => {
-    loadTransactions();
-  }, []);
+  const { transactions } = useContext(TransactionsContext);
 
   return (
     <div>
@@ -40,17 +21,17 @@ export function Transactions() {
         <SerachForm />
         <TransactionsTable>
           <tbody>
-            {transactions.map((trasaction) => {
+            {transactions.map((transaction) => {
               return (
-                <tr key={trasaction.id}>
-                  <td width="50%">{trasaction.description}</td>
+                <tr key={transaction.id}>
+                  <td width="50%">{transaction.description}</td>
                   <td>
-                    <PriceHighlight variant={trasaction.type}>
-                      {trasaction.price}
+                    <PriceHighlight variant={transaction.type}>
+                      {transaction.price}
                     </PriceHighlight>
                   </td>
-                  <td>{trasaction.category}</td>
-                  <td>{trasaction.createdAt}</td>
+                  <td>{transaction.category}</td>
+                  <td>{transaction.createdAt}</td>
                 </tr>
               );
             })}
