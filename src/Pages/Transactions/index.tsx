@@ -1,4 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useContextSelector } from "use-context-selector";
 import { Header } from "../../Components/Header/index";
 import { Summary } from "../../Components/Summary";
 import { TransactionsContext } from "../../contexts/TransactionsContext";
@@ -11,7 +12,9 @@ import {
 } from "./styles";
 
 export function Transactions() {
-  const { transactions } = useContext(TransactionsContext);
+  const transactions = useContextSelector(TransactionsContext, (context) => {
+    return context.transactions;
+  });
 
   return (
     <div>
@@ -28,7 +31,7 @@ export function Transactions() {
                   <td width="50%">{transaction.description}</td>
                   <td>
                     <PriceHighlight variant={transaction.type}>
-                      {transaction.type === "outcome" && "- "}
+                      {transactions.type === "outcome" && "- "}
 
                       {priceFormatter.format(transaction.price)}
                     </PriceHighlight>
