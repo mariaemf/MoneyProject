@@ -23,6 +23,22 @@
       "category": "Pet",
       "price": 40,
       "createdAt": "2022-10-27T09:58:07.183Z"
+    },
+    {
+      "description": "Projeto Freelance ",
+      "price": 1500,
+      "category": "Venda ",
+      "type": "income",
+      "createdAt": "2022-10-31T23:34:29.711Z",
+      "id": 4
+    },
+    {
+      "description": "Maquiagem ",
+      "price": 50,
+      "category": "Cosméticos ",
+      "type": "outcome",
+      "createdAt": "2022-11-01T00:08:14.746Z",
+      "id": 5
     }
   ]
 }
